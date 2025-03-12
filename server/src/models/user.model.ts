@@ -1,6 +1,6 @@
 import { Document, model, Schema } from 'mongoose';
 import { Entities } from '../enums/id-prefix.enum';
-import { generateId } from '../utils/id-generate';
+import { generateId } from '../utils/idGenerator';
 
 interface IUser extends Document {
   email: string;
@@ -36,7 +36,6 @@ const userSchema = new Schema<IUser>(
     timestamps: true,
   }
 );
-
 const UserModel = model<IUser>('user', userSchema);
 
 export default UserModel;

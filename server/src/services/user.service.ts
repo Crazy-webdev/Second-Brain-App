@@ -1,6 +1,7 @@
-import { UserSignupDTO } from '../interfaces/user.interface';
+import { UserSigninDTO, UserSignupDTO } from '../interfaces/user.interface';
 import UserModel from '../models/user.model';
-import { encryptPassword } from '../utils/password';
+import { comparePassword, encryptPassword } from '../utils/password';
+import jwt from 'jsonwebtoken';
 
 export class UserService {
   async userSignup(data: UserSignupDTO): Promise<void> {
@@ -25,6 +26,21 @@ export class UserService {
       throw new Error('Error in creating user. Please try again');
     }
     return;
+  }
+
+  async userSignin(data: UserSigninDTO): Promise<Record<string, string>> {
+    const { email,password } = data;
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      throw new Error('User not found')
+    }
+    const checkPassword = await comparePassword(password,user.password);
+    if (!checkPassword) {
+      throw new Error('Incorrect password')
+    }
+    const token = jwt.sign(email,process.env.JWT_SECRET);
+
+    return { token };
   }
 }
 
