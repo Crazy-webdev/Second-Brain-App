@@ -8,27 +8,27 @@ interface ILink extends Document {
 }
 
 const linkSchema = new Schema<ILink>(
-  {
-    _id:{
-      type:String,
-      required:true,
-      default: ()=> generateId(Entities.LINK)
+    {
+        _id:{
+            type:String,
+            required:true,
+            default: ()=> generateId(Entities.LINK)
+        },
+        userId:{
+            type:String,
+            required:true,
+            ref:'user'
+        },
+        hash:{
+            type:String,
+            required:true,
+        }
     },
-    userId:{
-      type:String,
-      required:true,
-      ref:'user'
-    },
-    hash:{
-      type:String,
-      required:true,
+    {
+        versionKey: false,
+        _id: false,
+        timestamps: true,
     }
-  },
-  {
-    versionKey: false,
-    _id: false,
-    timestamps: true,
-  }
 );
 const LinkModel = model<ILink>('link', linkSchema);
 

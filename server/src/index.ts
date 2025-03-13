@@ -5,6 +5,7 @@ import { connectDb } from './config/db';
 import { userRouter } from './routes/user.routes';
 import { limiter } from './middlewares/rateLimiter.middleware';
 import { errorHandler } from './utils/errorHandler';
+import { contentRouter } from './routes/content.routes';
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
@@ -19,8 +20,10 @@ app.use(limiter);
 
 app.use('/api/v1/user', userRouter);
 
+app.use('/api/v1/content',contentRouter);
+
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log(`Listening to port ${port}`);
+    console.log(`Listening to port ${port}`);
 });

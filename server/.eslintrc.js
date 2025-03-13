@@ -14,7 +14,19 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    indent: ['error', 2],
+    indent: ['error', 4, {
+      SwitchCase: 1,
+      VariableDeclarator: 'first',
+      FunctionDeclaration: { parameters: 'first' },
+      FunctionExpression: { parameters: 'first' },
+      CallExpression: { arguments: 'first' },
+      ArrayExpression: 'first',
+      ObjectExpression: 'first',
+      ImportDeclaration: 'first',
+      flatTernaryExpressions: false,
+      ignoredNodes: [],
+      ignoreComments: false
+    }],
     'no-trailing-spaces': 'error',
     'space-before-blocks': 'error',
     'space-before-function-paren': [
@@ -29,6 +41,10 @@ module.exports = {
     'space-infix-ops': 'error',
     'keyword-spacing': 'error',
     'object-curly-spacing': ['error', 'always'],
+    'function-paren-newline': ['error', 'multiline'],
+    'arrow-body-style': ['error', 'as-needed'],
+    'arrow-parens': ['error', 'always'],
+    'function-call-argument-newline': ['error', 'consistent'],
     quotes: [
       'error',
       'single',

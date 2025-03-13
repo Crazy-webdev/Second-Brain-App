@@ -3,18 +3,16 @@ import { AnyZodObject } from 'zod';
 
 
 
-export const validate = (schema:AnyZodObject) => {
-  return (req:Request,res:Response,next:NextFunction):void =>{
+export const validate = (schema:AnyZodObject) => (req:Request,res:Response,next:NextFunction):void =>{
     try {
-      schema.parse(req.body);
+        schema.parse(req.body);
 
-      next();
+        next();
     } catch (err) {
-      res.status(400).json({
-        status:'error',
-        message:'Invalid input data',
-        error: err
-      })
+        res.status(400).json({
+            status:'error',
+            message:'Invalid input data',
+            error: err
+        })
     }
-  }
 }

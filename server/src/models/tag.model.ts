@@ -7,23 +7,23 @@ interface ITag extends Document {
 }
 
 const tagSchema = new Schema<ITag>(
-  {
-    _id:{
-      type:String,
-      required:true,
-      default: ()=> generateId(Entities.TAG)
+    {
+        _id:{
+            type:String,
+            required:true,
+            default: ()=> generateId(Entities.TAG)
+        },
+        title:{
+            type:String,
+            required:true,
+            unique:true,
+        }
     },
-    title:{
-      type:String,
-      required:true,
-      unique:true,
+    {
+        versionKey: false,
+        _id: false,
+        timestamps: true,
     }
-  },
-  {
-    versionKey: false,
-    _id: false,
-    timestamps: true,
-  }
 );
 const TagModel = model<ITag>('tag', tagSchema);
 

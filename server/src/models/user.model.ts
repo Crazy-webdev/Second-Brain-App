@@ -9,32 +9,32 @@ interface IUser extends Document {
 }
 
 const userSchema = new Schema<IUser>(
-  {
-    _id:{
-      type:String,
-      required:true,
-      default: ()=> generateId(Entities.USER)
+    {
+        _id:{
+            type:String,
+            required:true,
+            default: ()=> generateId(Entities.USER)
+        },
+        email: {
+            type: String,
+            unique: true,
+            required: true,
+        },
+        username: {
+            type: String,
+            unique: true,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
     },
-    email: {
-      type: String,
-      unique: true,
-      required: true,
-    },
-    username: {
-      type: String,
-      unique: true,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-  },
-  {
-    versionKey: false,
-    _id: false,
-    timestamps: true,
-  }
+    {
+        versionKey: false,
+        _id: false,
+        timestamps: true,
+    }
 );
 const UserModel = model<IUser>('user', userSchema);
 
