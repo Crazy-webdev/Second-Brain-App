@@ -38,7 +38,7 @@ export class UserService {
         if (!checkPassword) {
             throw new Error('Incorrect password')
         }
-        const token = jwt.sign(email,process.env.JWT_SECRET);
+        const token = jwt.sign({ id:user.id },process.env.JWT_SECRET);
 
         return { token };
     }
