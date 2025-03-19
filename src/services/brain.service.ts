@@ -6,6 +6,12 @@ import { GetBrainContents } from '../interfaces/link.interface';
 export class BrainService {
     async shareBrain(id: string, share: string): Promise<string | void> {
         if (share === 'true') {
+            const isLink = await LinkModel.findOne({
+                userId:id
+            })
+            if (isLink) {
+                return isLink.hash;
+            }
             const link = await LinkModel.create({
                 userId: id,
                 hash: randomLink(10),
