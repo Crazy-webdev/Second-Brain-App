@@ -3,26 +3,27 @@ import { Entities } from '../enums/id-prefix.enum';
 import { generateId } from '../utils/idGenerator';
 
 interface ILink extends Document {
-    userId:string,
-    hash:string,
+    userId: string;
+    hash: string;
 }
 
 const linkSchema = new Schema<ILink>(
     {
-        _id:{
-            type:String,
-            required:true,
-            default: ()=> generateId(Entities.LINK)
+        _id: {
+            type: String,
+            required: true,
+            default: () => generateId(Entities.LINK),
         },
-        userId:{
-            type:String,
-            required:true,
-            ref:'user'
+        userId: {
+            type: String,
+            required: true,
+            ref: 'user',
+            unique: true,
         },
-        hash:{
-            type:String,
-            required:true,
-        }
+        hash: {
+            type: String,
+            required: true,
+        },
     },
     {
         versionKey: false,
